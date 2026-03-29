@@ -316,7 +316,7 @@ const About = () => {
               <div className="w-full h-full rounded-2xl overflow-hidden bg-black/50 relative">
                 {/* Placeholder for Cut-out Image */}
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" 
+                  src="/assets/2.jpeg" 
                   alt="Farozi" 
                   className="w-full h-full object-cover mix-blend-luminosity opacity-80 hover:mix-blend-normal hover:opacity-100 transition-all duration-500"
                   referrerPolicy="no-referrer"
