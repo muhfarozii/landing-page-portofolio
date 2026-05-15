@@ -42,7 +42,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex flex-col overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/60 z-10" />
@@ -57,7 +57,8 @@ const Hero = () => {
         </video>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center text-center mt-20">
+      {/* Main Content — flex-1 fills remaining space, pt-24 accounts for fixed navbar */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-7xl w-full mx-auto px-6 text-center pt-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,13 +104,13 @@ const Hero = () => {
           </button>
         </motion.div>
       </div>
-      
-      {/* Scroll indicator */}
+
+      {/* Scroll indicator — in normal flow at bottom, never overlaps content */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        className="relative z-10 flex flex-col items-center gap-2 pb-8"
       >
         <span className="text-xs text-gray-500 uppercase tracking-widest">Scroll</span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-gray-500 to-transparent" />
@@ -161,7 +162,7 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, key }: { project: typeof projects[0]; key?: React.Key }) => {
+const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -391,7 +392,7 @@ const ToolMarquee = () => {
       <div className="flex w-max animate-marquee">
         {tools.map((tool, idx) => (
           <div 
-            key={'group1-${idx}'} 
+            key={`group1-${idx}`}
             className="flex justify-center items-center px-8 group cursor-default"
           >
             <span className="text-2xl md:text-4xl font-display font-bold text-white/20 uppercase tracking-widest transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.8)] whitespace-nowrap">
@@ -405,7 +406,7 @@ const ToolMarquee = () => {
       <div className="flex" aria-hidden="true">
         {tools.map((tool, idx)=>(
           <div
-            key={'group2${idx}'}
+            key={`group2-${idx}`}
             className="flex justify-center items-center px-8 group cursor-default"
             >
               <span className="text-2xl md:text-4xl font-display font-bold text-white/20 uppercase tracking-widest transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.8)] whitespace-nowrap">
