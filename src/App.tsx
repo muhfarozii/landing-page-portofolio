@@ -4,7 +4,7 @@
  */
 
 import { motion } from "motion/react";
-import { ArrowRight, Play, Monitor, Video, Layers, Mail, Github, Twitter, Linkedin } from "lucide-react";
+import { ArrowRight, Play, Monitor, Video, Layers, Mail} from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const Navbar = () => {
@@ -21,7 +21,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-4 bg-black/40 backdrop-blur-xl border-b border-white/10" : "py-6 bg-transparent"}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-4 bg-black/40 backdrop-blur-xl border-b border-white/10" : "py-6 bg-transparent border-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="text-2xl font-display font-bold tracking-tighter">
@@ -53,7 +53,7 @@ const Hero = () => {
           playsInline
           className="w-full h-full object-cover opacity-60"
         >
-          <source src="https://cdn.pixabay.com/video/2020/05/25/40131-424823150_large.mp4" type="video/mp4" />
+          <source src="/assets/motion-graphic-star.mp4" type="video/mp4" />
         </video>
       </div>
 
@@ -444,14 +444,26 @@ const CTA = () => {
 const Footer = () => {
   return (
     <footer className="py-10 px-6 border-t border-white/10 bg-black">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="text-xl font-display font-bold">
           NEXUS<span className="text-[var(--color-neon-cyan)]">.</span>
         </div>
         <div className="flex gap-6 text-gray-400">
-          <a href="#" className="hover:text-white transition-colors"><Twitter className="w-5 h-5" /></a>
-          <a href="#" className="hover:text-white transition-colors"><Linkedin className="w-5 h-5" /></a>
-          <a href="#" className="hover:text-white transition-colors"><Github className="w-5 h-5" /></a>
+          <a href="#"
+            className="hover:opacity-100 opacity-60 transition-opacity">
+              <img src="/assets/x.png"
+            alt="X" className="w-5 h-5 object-contain invert"/>
+            </a>
+          <a href="#"
+            className="hover:opacity-100 opacity-60 transition-opacity">
+              <img src="/assets/linkedin.png"
+            alt="LinkedIn" className="w-5 h-5 object-contain invert"/>
+            </a>
+          <a href="#"
+            className="hover:opacity-100 opacity-60 transition-opacity">
+              <img src="/assets/github.png"
+            alt="Github" className="w-5 h-5 object-contain invert"/>
+            </a>
         </div>
         <p className="text-sm text-gray-500">© 2026 Nexus Studio. All rights reserved.</p>
       </div>
