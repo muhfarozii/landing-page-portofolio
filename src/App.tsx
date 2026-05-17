@@ -122,19 +122,21 @@ const Hero = () => {
 const projects = [
   {
     id: 1,
-    title: "Cyberpunk 2077 UI Concept",
+    title: "Landing Page Karang Taruna Papajos",
     category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-    video: "https://cdn.pixabay.com/video/2020/02/24/32888-394548655_large.mp4",
-    span: "col-span-1 md:col-span-2 row-span-2",
+    image: "/assets/landing-page-kartar-v2.png",
+    video: "",
+    span: "col-span-1 md:col-span-1 row-span-1",
+    link: "https://dribbble.com/shots/27174209-Karang-Taruna-Papajos-Youth-Organization-Website-Exploration", // Ganti dengan link spesifik proyek di Dribbble Anda
   },
   {
     id: 2,
-    title: "Neon Nights Promo",
-    category: "Video Editing",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop",
-    video: "https://cdn.pixabay.com/video/2021/08/11/84687-587467652_large.mp4",
+    title: "Redesigning the Huly landing page",
+    category: "UI/UX Design",
+    image: "/assets/huly.png",
+    video: "",
     span: "col-span-1 md:col-span-1 row-span-1",
+    link: "https://dribbble.com/shots/27172883-Huly-Landing-Page-Redesign-Concept",
   },
   {
     id: 3,
@@ -143,14 +145,16 @@ const projects = [
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop",
     video: "https://cdn.pixabay.com/video/2023/10/22/186008-876935105_large.mp4",
     span: "col-span-1 md:col-span-1 row-span-1",
+    link: "https://dribbble.com/Muhammad_farozi",
   },
   {
     id: 4,
     title: "Fintech App Redesign",
     category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    image: "",
     video: "https://cdn.pixabay.com/video/2020/05/25/40131-424823150_large.mp4",
-    span: "col-span-1 md:col-span-2 row-span-1",
+    span: "col-span-1 md:col-span-1 row-span-1",
+    link: "https://dribbble.com/Muhammad_farozi",
   },
   {
     id: 5,
@@ -159,6 +163,16 @@ const projects = [
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
     video: "https://cdn.pixabay.com/video/2020/05/25/40131-424823150_large.mp4",
     span: "col-span-1 md:col-span-1 row-span-1",
+    link: "https://dribbble.com/muhfarozii",
+  },
+    {
+    id: 6,
+    title: "Fintech App Redesign",
+    category: "UI/UX Design",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    video: "https://cdn.pixabay.com/video/2020/05/25/40131-424823150_large.mp4",
+    span: "col-span-1 md:col-span-1 row-span-1",
+    link: "https://dribbble.com/muhfarozii",
   }
 ];
 
@@ -176,12 +190,15 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
   }, [isHovered]);
 
   return (
-    <motion.div 
+    <motion.a 
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className={`relative group rounded-2xl overflow-hidden bg-white/5 border border-white/10 ${project.span}`}
+      className={`relative group rounded-2xl overflow-hidden bg-white/5 border border-white/10 block ${project.span}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -210,13 +227,13 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
       />
 
-      <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-        <div className="p-6 inline-block w-fit">
+      <div className="absolute inset-0 z-20 p-5 md:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+        <div className="inline-block w-fit">
           <span className="text-[var(--color-neon-cyan)] text-sm font-medium mb-2 block">{project.category}</span>
           <h3 className="text-2xl font-display font-bold text-white">{project.title}</h3>
         </div>
       </div>
-    </motion.div>
+    </motion.a>
   );
 };
 
