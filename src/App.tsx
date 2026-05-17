@@ -449,17 +449,12 @@ const Footer = () => {
           NEXUS<span className="text-[var(--color-neon-cyan)]">.</span>
         </div>
         <div className="flex gap-6 text-gray-400">
-          <a href="#"
-            className="hover:opacity-100 opacity-60 transition-opacity">
-              <img src="/assets/x.png"
-            alt="X" className="w-5 h-5 object-contain invert"/>
-            </a>
-          <a href="#"
+          <a href="https://www.linkedin.com/in/muhammad-al-farozi"
             className="hover:opacity-100 opacity-60 transition-opacity">
               <img src="/assets/linkedin.png"
             alt="LinkedIn" className="w-5 h-5 object-contain invert"/>
             </a>
-          <a href="#"
+          <a href="https://github.com/muhfarozii"
             className="hover:opacity-100 opacity-60 transition-opacity">
               <img src="/assets/github.png"
             alt="Github" className="w-5 h-5 object-contain invert"/>
