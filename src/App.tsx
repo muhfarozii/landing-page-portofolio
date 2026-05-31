@@ -1,10 +1,11 @@
+/// <reference types="vite/client" />
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { motion } from "motion/react";
-import { ArrowRight, Play, Monitor, Video, Layers, Mail} from "lucide-react";
+import { ArrowRight, Play, Monitor, Video, Layers, Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const Navbar = () => {
@@ -155,24 +156,6 @@ const projects = [
     video: "",
     span: "col-span-1 md:col-span-1 row-span-1",
     link: "https://dribbble.com/shots/27173057-Redesigning-SOPA-Simplifying-the-Luxury-Shopping-Journey",
-  },
-  {
-    id: 5,
-    title: "Fintech App Redesign",
-    category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    video: "https://cdn.pixabay.com/video/2020/05/25/40131-424823150_large.mp4",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    link: "https://dribbble.com/muhfarozii",
-  },
-    {
-    id: 6,
-    title: "Fintech App Redesign",
-    category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    video: "https://cdn.pixabay.com/video/2020/05/25/40131-424823150_large.mp4",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    link: "https://dribbble.com/muhfarozii",
   }
 ];
 
@@ -439,19 +422,176 @@ const ToolMarquee = () => {
 };
 
 const CTA = () => {
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("Tanya Budget Project");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_WEB3FORMS_ACCESS_KEY_HERE";
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          email: email,
+          subject: `Portfolio Contact: ${subject}`,
+          message: message,
+          from_name: "Nexus Portfolio Client",
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+        setEmail("");
+        setSubject("Tanya Budget Project");
+        setMessage("");
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="py-32 px-6 relative overflow-hidden">
-      <div className="max-w-5xl mx-auto bg-gradient-to-br from-white/10 to-transparent border border-white/10 rounded-3xl p-12 md:p-24 text-center relative backdrop-blur-xl overflow-hidden">
-        {/* Glow effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[var(--color-neon-cyan)]/10 blur-[100px] pointer-events-none" />
-        
-        <div className="relative z-10">
-          <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Ready to create something <span className="text-[var(--color-neon-cyan)]">extraordinary?</span></h2>
-          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Let's collaborate to bring your vision to life with cutting-edge design and motion.</p>
-          
-          <button className="px-10 py-5 bg-[var(--color-neon-cyan)] text-black rounded-full font-bold text-lg hover:shadow-[0_0_40px_rgba(0,240,255,0.6)] transition-all hover:scale-105 flex items-center gap-3 mx-auto">
-            <Mail className="w-5 h-5" /> Start a Project
-          </button>
+      {/* Decorative background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-neon-cyan)]/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-3xl p-8 md:p-16 relative backdrop-blur-xl overflow-hidden">
+        {/* Glow effect inside card */}
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-[var(--color-neon-purple)]/10 blur-[100px] pointer-events-none" />
+        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[var(--color-neon-cyan)]/10 blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Heading and info */}
+          <div className="lg:col-span-5 text-left space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-neon-cyan)] animate-pulse" />
+              <span className="text-xs font-medium tracking-wider uppercase text-gray-300">Collab with me</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight">
+              Ready to create something <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-neon-cyan)] to-blue-500">extraordinary?</span>
+            </h2>
+            
+            <p className="text-gray-400 font-light leading-relaxed">
+              Let's collaborate to bring your vision to life with cutting-edge design, premium motion graphics, and high-converting copy.
+            </p>
+
+            <div className="pt-4 space-y-4">
+              <div className="flex items-center gap-3 text-gray-300">
+                <div className="p-3 rounded-full bg-white/5 border border-white/10">
+                  <Mail className="w-5 h-5 text-[var(--color-neon-cyan)]" />
+                </div>
+                <div>
+                  <span className="block text-xs text-gray-500 uppercase tracking-wider">Fast Response</span>
+                  <span className="text-sm font-medium">Replies within 24 hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Contact Form */}
+          <div className="lg:col-span-7">
+            <div className="bg-black/40 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-xl relative">
+              
+              {status === "success" && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 rounded-xl bg-cyan-500/10 border border-[var(--color-neon-cyan)]/30 text-[var(--color-neon-cyan)] flex items-center gap-3"
+                >
+                  <CheckCircle className="w-5 h-5 shrink-0" />
+                  <span className="text-sm font-medium">Email Anda sudah terkirim! Saya akan segera menghubungi Anda.</span>
+                </motion.div>
+              )}
+
+              {status === "error" && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center gap-3"
+                >
+                  <AlertCircle className="w-5 h-5 shrink-0" />
+                  <span className="text-sm font-medium">Gagal mengirim pesan. Silakan coba lagi nanti.</span>
+                </motion.div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-5 text-left">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email Anda</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="nama@email.com"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-[var(--color-neon-cyan)] focus:bg-white/10 focus:outline-none transition-all text-white text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Keperluan</label>
+                  <div className="relative">
+                    <select
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-[var(--color-neon-cyan)] focus:bg-white/10 focus:outline-none transition-all text-white text-sm appearance-none cursor-pointer"
+                    >
+                      <option value="Tanya Budget Project" className="bg-[#050505] text-white">Tanya Budget Project</option>
+                      <option value="Nego Harga" className="bg-[#050505] text-white">Nego Harga / Kerjasama</option>
+                      <option value="Tanya Freelance" className="bg-[#050505] text-white">Tanya Layanan Lainnya</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Deskripsi Keperluan</label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Jelaskan detail kebutuhan proyek atau penawaran Anda..."
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-[var(--color-neon-cyan)] focus:bg-white/10 focus:outline-none transition-all text-white text-sm resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full py-4 bg-[var(--color-neon-cyan)] text-black rounded-xl font-bold hover:shadow-[0_0_35px_rgba(0,240,255,0.6)] hover:scale-[1.02] active:scale-95 transition-all flex justify-center items-center gap-2 cursor-pointer disabled:opacity-50 disabled:pointer-events-none text-sm uppercase tracking-wider"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" /> Mengirim...
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="w-5 h-5" /> Kirim Pesan
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>
