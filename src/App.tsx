@@ -393,7 +393,7 @@ const ToolMarquee = () => {
         {tools.map((tool, idx) => (
           <div 
             key={`group1-${idx}`}
-            className="flex justify-center items-center px-8 group cursor-default"
+            className="flex justify-centegitr items-center px-8 group cursor-default"
           >
             <span className="text-2xl md:text-4xl font-display font-bold text-white/20 uppercase tracking-widest transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.8)] whitespace-nowrap">
               {tool}
