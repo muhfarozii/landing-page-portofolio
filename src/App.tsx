@@ -597,6 +597,14 @@ const CTA = () => {
 export default function App() {
   const [isIntroDone, setIsIntroDone] = useState(false);
 
+  useEffect(() => {
+    // Memaksa halaman kembali ke atas saat direfresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-[var(--color-neon-cyan)] selection:text-black font-sans overflow-x-hidden">
       <Navbar isVisible={isIntroDone} />
