@@ -602,7 +602,16 @@ export default function App() {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
+    
+    // Jalankan langsung
     window.scrollTo(0, 0);
+
+    // Jalankan kembali dengan sedikit delay untuk mengantisipasi load layout
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 200);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
