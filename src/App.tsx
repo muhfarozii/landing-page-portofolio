@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+﻿/// <reference types="vite/client" />
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -9,7 +9,7 @@ import { ArrowRight, Play, Monitor, Video, Layers, Mail, CheckCircle, AlertCircl
 import { useState, useRef, useEffect } from "react";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import { Component as EtheralShadow } from "@/components/ui/etheral-shadow";
-import { FaqProPreview } from "@/components/ui/demo";
+import { FaqProPreview, LogosSlider } from "@/components/ui/demo";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 
 const Navbar = ({ isVisible = true }: { isVisible?: boolean }) => {
@@ -342,45 +342,9 @@ const About = () => {
 };
 
 const ToolMarquee = () => {
-  const tools = [
-    "Adobe After Effects", "Figma", "CapCut PC", "Canva",
-    "Adobe After Effects", "Figma", "CapCut PC", "Canva",
-  ];
-
   return (
-    <div className="py-10 border-y border-white/5 bg-black/50 overflow-hidden relative flex w-full">
-      {/* Gradient Masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
-      
-      <div className="flex w-max animate-marquee">
-        {tools.map((tool, idx) => (
-          <div 
-            key={`group1-${idx}`}
-            className="flex justify-centegitr items-center px-8 group cursor-default"
-          >
-            <span className="text-2xl md:text-4xl font-display font-bold text-white/20 uppercase tracking-widest transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.8)] whitespace-nowrap">
-              {tool}
-            </span>
-            <span className="mx-8 text-white/10 text-2xl">•</span>
-          </div>
-        ))}
-      </div>
-      {/* Grup 2 (duplikat untuk menyambung tanpa henti) */}
-      <div className="flex" aria-hidden="true">
-        {tools.map((tool, idx)=>(
-          <div
-            key={`group2-${idx}`}
-            className="flex justify-center items-center px-8 group cursor-default"
-            >
-              <span className="text-2xl md:text-4xl font-display font-bold text-white/20 uppercase tracking-widest transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(0,240,255,0.8)] whitespace-nowrap">
-                {tool}
-              </span>
-              <span className="mx-8 text-white/10 text-2xl">•</span>
-            </div>
-        ))}
-
-      </div>
+    <div className="py-10 border-y border-white/5 bg-black/50 overflow-hidden relative">
+      <LogosSlider />
     </div>
   );
 };
