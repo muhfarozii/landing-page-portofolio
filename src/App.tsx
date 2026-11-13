@@ -5,12 +5,13 @@
  */
 
 import { motion } from "motion/react";
-import { ArrowRight, Play, Monitor, Video, Layers, Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { Monitor, Video, Layers, Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import { Component as EtheralShadow } from "@/components/ui/etheral-shadow";
 import { FaqProPreview, LogosSlider } from "@/components/ui/demo";
 import { CinematicFooter } from "@/components/ui/motion-footer";
+import { SelectedWorks } from "@/components/selected-works";
 
 const Navbar = ({ isVisible = true }: { isVisible?: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -33,13 +34,13 @@ const Navbar = ({ isVisible = true }: { isVisible?: boolean }) => {
           NEXUS<span className="text-[var(--color-neon-cyan)]">.</span>
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300">
-          <a href="#work" className="hover:text-white transition-colors">Work</a>
+          <a href="#work" className="hover:text-white transition-colors">Selected Works</a>
           <a href="#services" className="hover:text-white transition-colors">Services</a>
           <a href="#about" className="hover:text-white transition-colors">About</a>
         </div>
-        <button className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all text-sm font-medium">
+        <a href="#contact" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all text-sm font-medium">
           Let's Talk
-        </button>
+        </a>
       </div>
     </motion.nav>
   );
@@ -65,18 +66,18 @@ const DemoOne = ({ onComplete, onRevealStart }: { onComplete?: () => void, onRev
             Specializing in high-end video editing, immersive motion graphics, and intuitive UI/UX design that leaves a lasting impression.
           </p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-            <button
-              type="button"
+            <a
+              href="#contact"
               className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-colors hover:bg-gray-200"
             >
               Start a project
-            </button>
-            <button
-              type="button"
+            </a>
+            <a
+              href="#work"
               className="rounded-full px-5 py-2.5 text-sm font-medium text-white ring-1 ring-white/20 transition-colors hover:bg-white/10"
             >
               See our work
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -84,127 +85,6 @@ const DemoOne = ({ onComplete, onRevealStart }: { onComplete?: () => void, onRev
   );
 };
 
-const projects = [
-  {
-    id: 1,
-    title: "Landing Page Karang Taruna Papajos",
-    category: "UI/UX Design",
-    image: "/assets/landing-page-kartar-v2.png",
-    video: "",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    link: "https://dribbble.com/shots/27174209-Karang-Taruna-Papajos-Youth-Organization-Website-Exploration", // Ganti dengan link spesifik proyek di Dribbble Anda
-  },
-  {
-    id: 2,
-    title: "Redesign the Huly landing page",
-    category: "UI/UX Design",
-    image: "/assets/huly.png",
-    video: "",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    link: "https://dribbble.com/shots/27172883-Huly-Landing-Page-Redesign-Concept",
-  },
-  {
-    id: 3,
-    title: "Redesign FootLook landing page",
-    category: "UI/UX Design",
-    image: "/assets/redesign-footlook.png",
-    video: "",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    link: "https://dribbble.com/shots/27173030-Footlook-Redesign-Merging-Sports-Data-with-Modern-UIh",
-  },
-  {
-    id: 4,
-    title: "Redesign Sopa landing page",
-    category: "UI/UX Design",
-    image: "/assets/redesign-sopa.png",
-    video: "",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    link: "https://dribbble.com/shots/27173057-Redesigning-SOPA-Simplifying-the-Luxury-Shopping-Journey",
-  }
-];
-
-const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (isHovered && videoRef.current) {
-      videoRef.current.play().catch(e => console.log("Autoplay prevented", e));
-    } else if (!isHovered && videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  }, [isHovered]);
-
-  return (
-    <motion.a 
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6 }}
-      className={`relative group rounded-2xl overflow-hidden bg-white/5 border border-white/10 block ${project.span}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 > */}
-
-      {/* lapisan dasar: sedikit gelap agar gambar tidak terlalu silau saat tidak di hover */}
-      <div className="absolute inset-0 bg-black/20 z-10" /> 
-
-      {/* laipsan gradasi: dari hitam pekat dibawah (from-black/90) memudar ke transparan di atas (to-transparent). 
-      Awalnya tak terlihat (opacity-0), lalu muncul saat di-hover (group-hover:opacity-100)*/}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-      
-      <img 
-        src={project.image} 
-        alt={project.title} 
-        className={`w-full h-full object-cover`}
-        referrerPolicy="no-referrer"
-      />
-      
-      <video
-        ref={videoRef}
-        src={project.video}
-        muted
-        loop
-        playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-      />
-
-      <div className="absolute inset-0 z-20 p-5 md:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-        <div className="inline-block w-fit">
-          <span className="text-[var(--color-neon-cyan)] text-sm font-medium mb-2 block">{project.category}</span>
-          <h3 className="text-2xl font-display font-bold text-white">{project.title}</h3>
-        </div>
-      </div>
-    </motion.a>
-  );
-};
-
-const Portfolio = () => {
-  return (
-    <section id="work" className="py-32 px-6 max-w-7xl mx-auto">
-      <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
-        <div>
-          <h2 className="text-4xl md:text-6xl font-display font-bold mb-4">Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Works</span></h2>
-          <p className="text-gray-400 max-w-md">A showcase of my latest projects across video editing, motion graphics, and digital product design.</p>
-        </div>
-        <button className="flex items-center gap-2 text-sm font-medium hover:text-[var(--color-neon-cyan)] transition-colors">
-          View All Projects <ArrowRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] gap-6">
-        {projects.map(project => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
-    </section>
-  );
-};
 
 const services = [
   {
@@ -425,7 +305,7 @@ const CTA = () => {
   };
 
   return (
-    <section className="py-32 px-6 relative overflow-hidden">
+    <section id="contact" className="py-32 px-6 relative overflow-hidden">
       {/* Decorative background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-neon-cyan)]/5 rounded-full blur-[120px] pointer-events-none" />
       
@@ -590,7 +470,7 @@ export default function App() {
         />
         <About />
         <ToolMarquee />
-        <Portfolio />
+        <SelectedWorks />
         <Services />
         <FAQSection />
         <CTA />
@@ -600,4 +480,3 @@ export default function App() {
     </div>
   );
 }
-
