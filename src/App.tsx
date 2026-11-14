@@ -12,6 +12,7 @@ import { Component as EtheralShadow } from "@/components/ui/etheral-shadow";
 import { FaqProPreview, LogosSlider } from "@/components/ui/demo";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import { SelectedWorks } from "@/components/selected-works";
+import { PricingCard, BGComponent1, BGComponent2, BGComponent3 } from "@/components/ui/squishy-pricing";
 
 const Navbar = ({ isVisible = true }: { isVisible?: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -88,19 +89,28 @@ const DemoOne = ({ onComplete, onRevealStart }: { onComplete?: () => void, onRev
 
 const services = [
   {
-    icon: <Video className="w-8 h-8 text-[var(--color-neon-cyan)]" />,
+    label: "Video Production",
     title: "Video Editing",
-    desc: "Cinematic cuts, color grading, and dynamic storytelling that captivates audiences from the first frame."
+    desc: "Cinematic cuts, color grading, and dynamic storytelling that captivates audiences from the first frame.",
+    icon: <Video className="w-5 h-5 text-white" />,
+    background: "bg-gradient-to-br from-cyan-600 via-sky-700 to-blue-900 border-cyan-400/30",
+    BGComponent: BGComponent1
   },
   {
-    icon: <Layers className="w-8 h-8 text-[var(--color-neon-purple)]" />,
+    label: "Motion & 3D",
     title: "Motion Graphics",
-    desc: "Fluid animations, 3D elements, and visual effects that bring static concepts to life."
+    desc: "Fluid animations, 3D elements, and visual effects that bring static concepts to life.",
+    icon: <Layers className="w-5 h-5 text-white" />,
+    background: "bg-gradient-to-br from-purple-600 via-violet-700 to-indigo-900 border-purple-400/30",
+    BGComponent: BGComponent2
   },
   {
-    icon: <Monitor className="w-8 h-8 text-blue-400" />,
+    label: "Digital Product",
     title: "UI/UX Design",
-    desc: "Intuitive, glassmorphic, and futuristic interfaces designed for seamless user experiences."
+    desc: "Intuitive, glassmorphic, and futuristic interfaces designed for seamless user experiences.",
+    icon: <Monitor className="w-5 h-5 text-white" />,
+    background: "bg-gradient-to-br from-blue-600 via-indigo-700 to-slate-900 border-blue-400/30",
+    BGComponent: BGComponent3
   }
 ];
 
@@ -111,27 +121,30 @@ const Services = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-neon-cyan)]/5 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Expertise</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">Bridging the gap between visual storytelling and interactive design.</p>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4">
+            <span className="w-2 h-2 rounded-full bg-[var(--color-neon-cyan)] animate-pulse" />
+            <span className="text-xs font-medium tracking-wider uppercase text-gray-300">Services</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">Expertise</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-base md:text-lg">
+            Bridging the gap between visual storytelling and interactive design.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-8">
           {services.map((service, idx) => (
-            <motion.div 
+            <PricingCard
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-black/40 backdrop-blur-xl border border-white/10 p-8 rounded-2xl hover:bg-white/5 transition-colors group"
-            >
-              <div className="mb-6 p-4 bg-white/5 rounded-xl inline-block group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{service.desc}</p>
-            </motion.div>
+              label={service.label}
+              title={service.title}
+              description={service.desc}
+              cta="Start a Project"
+              ctaLink="#contact"
+              icon={service.icon}
+              background={service.background}
+              BGComponent={service.BGComponent}
+            />
           ))}
         </div>
       </div>

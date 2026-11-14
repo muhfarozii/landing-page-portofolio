@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import FAQs, { type FaqItem } from "@/components/ui/text-reveal-faqs";
+import { Component as SquishyPricing } from "@/components/ui/squishy-pricing";
 import { InfiniteSlider } from '@/components/ui/infinite-slider';
 import { ProgressiveBlur } from '@/components/ui/progressive-blur';
 
@@ -57,6 +58,10 @@ export function FaqProPreview() {
 
 export default function DemoOne() {
   return <FAQs />;
+}
+
+export function DemoSquishyPricing() {
+  return <SquishyPricing />;
 }
 
 const logos = [
