@@ -1,39 +1,62 @@
 ﻿"use client";
 
-import { FaqPro, type FaqProItem } from "@/components/ui/faq-pro";
+import FAQs, { type FaqItem } from "@/components/ui/text-reveal-faqs";
 import { InfiniteSlider } from '@/components/ui/infinite-slider';
 import { ProgressiveBlur } from '@/components/ui/progressive-blur';
 
-const items: FaqProItem[] = [
+export const portfolioFaqItems: FaqItem[] = [
   {
-    id: "what-is-iconiq",
-    question: "Apa saja tahapan proses kerja yang Anda lakukan dalam mendesain produk?",
-    answer: "Proses kerja saya mengikuti pendekatan Design Thinking: dimulai dari riset pengguna (UX Research), penyusunan alur (Information Architecture & User Flow), pembuatan kerangka (Wireframing), desain visual (High-Fidelity UI), hingga pembuatan Prototype yang interaktif.",
+    id: "item-1",
+    question: "What is your end-to-end product design workflow?",
+    answer: "My workflow follows a user-centered Design Thinking approach: beginning with user research and information architecture, wireframing, high-fidelity visual design, through to interactive prototyping and usability validation.",
   },
   {
-    id: "install-iconiq",
-    question: "Apakah hasil akhir desain yang saya terima sudah siap diserahkan ke tim Developer?",
-    answer: "Ya, tentu saja. Saya menggunakan Figma dengan implementasi Auto Layout dan menyusun Design System yang rapi. Hal ini memastikan proses penyerahan desain (developer handoff) berjalan lancar, terstruktur, dan mudah diimplementasikan oleh tim pengembang.  ",
+    id: "item-2",
+    question: "Are the final design deliverables fully ready for developers?",
+    answer: "Yes, absolutely. I design in Figma utilizing Auto Layout, structured design tokens, and scalable components. This ensures a seamless, well-documented handoff that developers can build with confidence.",
   },
   {
-    id: "iconiq-free",
-    question: "Apa yang membedakan jasa desain Anda dengan desainer UI/UX lainnya?",
-    answer: "Selain berfokus pada estetika visual yang modern, saya selalu mendalami sisi Usability untuk memastikan setiap elemen desain memiliki alasan yang kuat dalam memecahkan masalah pengguna dan mendukung tujuan bisnis Anda.",
+    id: "item-3",
+    question: "What sets your creative work apart from other UI/UX designers?",
+    answer: "Beyond crafting futuristic and polished visual aesthetics, I place equal weight on usability and conversion strategy—ensuring every element directly supports your brand's growth and user engagement.",
   },
   {
-    id: "iconiq-tooling",
-    question: "Apa saja perangkat lunak (Software) yang Anda gunakan dalam proses desain?",
-    answer: "Saya sangat fleksibel dalam menggunakan tools, tergantung pada kebutuhan project dan preferensi client. Namun, tools utama yang sering saya gunakan adalah: Figma (untuk UI/UX Design), Adobe Premiere Pro & After Effects (untuk Video Editing & Motion Graphics), serta Canva (untuk desain grafis sederhana dan konten media sosial). Jika Anda memiliki preferensi tool khusus, mohon informasikan kepada saya.",
+    id: "item-4",
+    question: "What software and creative tools do you specialize in?",
+    answer: "I leverage industry-standard creative tools tailored to each project: Figma for UI/UX Design & Prototyping, Adobe Premiere Pro & After Effects for Video Editing & Motion Graphics, and Canva for agile visual assets.",
   },
   {
-    id: "iconiq-delivery",
-    question: "Apakah Anda memberikan file sumber (source files) setelah proyek selesai?",
-    answer: "Tentu saja. Untuk memastikan kolaborasi yang mulus dengan tim Anda, saya selalu menyediakan file sumber lengkap. Untuk proyek UI/UX, saya akan memberikan akses penuh ke file Figma (termasuk komponen, style guide, dan file prototype). Untuk proyek video, saya akan memberikan file project (sesuai permintaan), file footage (jika tidak melanggar hak cipta), serta file render final dalam berbagai format yang dibutuhkan.",
+    id: "item-5",
+    question: "Do you provide complete source files upon project delivery?",
+    answer: "Yes, definitely. You receive full ownership and access to all project assets: Figma files with components, style guides, and interactive prototypes for UI work; and project files, assets, and high-resolution renders for video and motion projects.",
   }
 ];
 
 export function FaqProPreview() {
-  return <FaqPro className="w-full" defaultOpenFirst items={items} />;
+  return (
+    <FAQs
+      title={
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[var(--color-neon-cyan)] animate-pulse" />
+            <span className="text-xs font-medium tracking-wider uppercase text-gray-300">FAQ</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight text-white tracking-tight">
+            Frequently Asked Questions
+          </h2>
+        </div>
+      }
+      subtitle="Find answers to common questions about my services, design workflow, and how we can collaborate."
+      supportLink="#contact"
+      supportText="Farozi support team"
+      items={portfolioFaqItems}
+      className="py-0 md:py-0"
+    />
+  );
+}
+
+export default function DemoOne() {
+  return <FAQs />;
 }
 
 const logos = [
@@ -151,5 +174,3 @@ export function LogosSlider() {
     </div>
   );
 }
-
-export default FaqProPreview;

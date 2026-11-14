@@ -235,25 +235,24 @@ const FAQSection = () => {
       {/* Decorative background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-neon-cyan)]/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="max-w-6xl mx-auto bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-3xl p-8 md:p-16 relative backdrop-blur-xl overflow-hidden">
-        {/* Glow effect inside card */}
+      <div className="max-w-6xl mx-auto bg-[#0a0a0a]/80 border border-white/15 rounded-3xl p-8 md:p-16 relative backdrop-blur-xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+        {/* Animated moving black silk / wavy cloth with white light reflections */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-45">
+          <EtheralShadow
+            color="rgba(255, 255, 255, 0.45)"
+            animation={{ scale: 100, speed: 75 }}
+            noise={{ opacity: 0.9, scale: 1.2 }}
+            sizing="fill"
+          />
+          {/* Subtle gradient vignette to blend edges smoothly with depth */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80" />
+        </div>
+
+        {/* Subtle decorative glow */}
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-[var(--color-neon-purple)]/10 blur-[100px] pointer-events-none" />
         <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[var(--color-neon-cyan)]/10 blur-[100px] pointer-events-none" />
 
-        <div className="relative z-10 text-center mb-10 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
-            <span className="w-2 h-2 rounded-full bg-[var(--color-neon-cyan)] animate-pulse" />
-            <span className="text-xs font-medium tracking-wider uppercase text-gray-300">FAQ</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight mb-4">
-            Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-neon-cyan)] to-[var(--color-neon-purple)]">Questions</span>
-          </h2>
-          <p className="text-gray-400 font-light leading-relaxed max-w-2xl mx-auto">
-            Find answers to common questions about my services, process, and how we can work together.
-          </p>
-        </div>
-        
-        <div className="relative z-10 w-full dark">
+        <div className="relative z-10 w-full">
            <FaqProPreview />
         </div>
       </div>
